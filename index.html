@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DESTINY '26 | Master Mind Education 5th Anniversary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       1. STRICT BURGUNDY & SILVER COLOR SYSTEM
+       ========================================================================== */
+    :root {
+      --bg-primary: #200711;
+      --bg-deep: #30091A;
+      --bg-surface: #4A1028;
+      --bg-highlight: #70213F;
+      
+      --silver-bright: #E6E7EB;
+      --silver-primary: #C5C7CC;
+      --silver-soft: #A9ABB3;
+      --silver-dark: #777B85;
+      
+      --glass-bg: rgba(48, 9, 26, 0.85);
+      --glass-border: rgba(197, 199, 204, 0.25);
+      --glass-border-strong: rgba(230, 231, 235, 0.5);
+      
+      --shadow-lux: 0 20px 50px rgba(0, 0, 0, 0.6);
+      --shadow-inset: inset 0 0 20px rgba(112, 33, 63, 0.3);
+      
+      --font-heading: 'Cinzel', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--silver-primary);
+      font-family: var(--font-body);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      background: radial-gradient(circle at 50% 0%, var(--bg-highlight) 0%, var(--bg-deep) 50%, var(--bg-primary) 100%);
+      background-attachment: fixed;
+    }
+
+    /* Architectural Silver Grid Overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: 
+        linear-gradient(rgba(197, 199, 204, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(197, 199, 204, 0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    h1, h2, h3, h4, .brand-font {
+      font-family: var(--font-heading);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--silver-bright);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: var(--font-body);
+      border: none;
+      outline: none;
+      background: none;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ==========================================================================
+       2. NAVIGATION
+       ========================================================================== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 90px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-logo svg {
+      width: 42px;
+      height: 42px;
+      filter: drop-shadow(0 0 8px rgba(197, 199, 204, 0.3));
+    }
+
+    .brand-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--silver-bright);
+    }
+
+    .brand-subtitle {
+      font-size: 0.65rem;
+      color: var(--silver-soft);
+      letter-spacing: 0.2em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--silver-soft);
+      padding: 8px 0;
+      position: relative;
+      transition: var(--transition-smooth);
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--silver-bright);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--silver-bright), transparent);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-link.active::after, .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px;
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      border-radius: 4px;
+    }
+
+    .mobile-menu-btn span {
+      width: 24px;
+      height: 2px;
+      background: var(--silver-bright);
+      transition: var(--transition-smooth);
+    }
+
+    /* ==========================================================================
+       3. PAGE VIEWS SYSTEM
+       ========================================================================== */
+    main {
+      flex: 1;
+      padding-top: 90px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .page-view {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      min-height: calc(100vh - 90px - 150px);
+      padding: 4rem 0;
+    }
+
+    .page-view.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Section Headings */
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-tag {
+      font-size: 0.85rem;
+      color: var(--silver-soft);
+      letter-spacing: 0.3em;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--silver-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .silver-divider {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--silver-bright), transparent);
+      margin: 0 auto;
+    }
+
+    /* ==========================================================================
+       4. HOME PAGE — HERO & COUNTDOWN
+       ========================================================================== */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 24px;
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      background: rgba(112, 33, 63, 0.3);
+      backdrop-filter: blur(8px);
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      color: var(--silver-bright);
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-inset);
+    }
+
+    .hero-title {
+      font-size: 5rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      line-height: 1.1;
+      background: linear-gradient(180deg, #FFFFFF 30%, var(--silver-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      color: var(--silver-soft);
+      margin-bottom: 3rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: var(--silver-primary);
+      letter-spacing: 0.1em;
+    }
+
+    .meta-item svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--silver-bright);
+    }
+
+    /* Countdown */
+    .countdown-container {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .countdown-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--glass-border);
+      padding: 1.5rem;
+      min-width: 110px;
+      border-radius: 8px;
+      box-shadow: var(--shadow-lux);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .countdown-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--silver-bright), transparent);
+    }
+
+    .countdown-value {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--silver-bright);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .countdown-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--silver-dark);
+      text-transform: uppercase;
+    }
+
+    /* Buttons */
+    .cta-group {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .btn-primary {
+      padding: 1rem 2.5rem;
+      background: var(--bg-highlight);
+      color: var(--silver-bright);
+      border: 1px solid var(--silver-primary);
+      border-radius: 4px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .btn-primary:hover {
+      background: var(--silver-bright);
+      color: var(--bg-deep);
+      box-shadow: 0 0 25px rgba(230, 231, 235, 0.4);
+    }
+
+    .btn-secondary {
+      padding: 1rem 2.5rem;
+      background: rgba(48, 9, 26, 0.6);
+      color: var(--silver-primary);
+      border: 1px solid var(--glass-border);
+      border-radius: 4px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--silver-bright);
+      color: var(--silver-bright);
+      background: rgba(112, 33, 63, 0.4);
+    }
+
+    /* ==========================================================================
+       5. AGENDA PAGE
+       ========================================================================== */
+    .search-bar {
+      max-width: 600px;
+      margin: 0 auto 3rem auto;
+      display: flex;
+      gap: 1rem;
+      background: var(--bg-surface);
+      padding: 8px;
+      border: 1px solid var(--glass-border);
+      border-radius: 6px;
+    }
+
+    .search-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 0.8rem 1rem;
+      color: var(--silver-bright);
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: var(--silver-dark);
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, var(--silver-dark), var(--silver-primary), var(--silver-dark), transparent);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+      width: 50%;
+      padding-right: 3rem;
+      box-sizing: border-box;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+      padding-right: 0;
+      padding-left: 3rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      top: 20px;
+      right: -8px;
+      width: 14px;
+      height: 14px;
+      background: var(--bg-primary);
+      border: 2px solid var(--silver-bright);
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      right: auto;
+      left: -8px;
+    }
+
+    .timeline-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--glass-border);
+      padding: 1.5rem;
+      border-radius: 6px;
+      box-shadow: var(--shadow-lux);
+      transition: var(--transition-smooth);
+    }
+
+    .timeline-card:hover {
+      border-color: var(--silver-bright);
+      transform: translateY(-3px);
+    }
+
+    .timeline-time {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--silver-bright);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(112, 33, 63, 0.5);
+      border-radius: 4px;
+    }
+
+    .timeline-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--silver-bright);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.85rem;
+      color: var(--silver-soft);
+      line-height: 1.6;
+    }
+
+    .badge-nearby {
+      display: inline-block;
+      font-size: 0.65rem;
+      background: var(--silver-dark);
+      color: var(--bg-primary);
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ==========================================================================
+       6. CHIEF GUEST PAGE
+       ========================================================================== */
+    .chief-guest-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .guest-image-container {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border-strong);
+      box-shadow: var(--shadow-lux);
+      background: var(--bg-surface);
+    }
+
+    .guest-image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: grayscale(20%) contrast(105%);
+      transition: var(--transition-smooth);
+    }
+
+    .guest-image-container:hover img {
+      filter: grayscale(0%) contrast(100%);
+    }
+
+    .guest-details h3 {
+      font-size: 2rem;
+      color: var(--silver-bright);
+      margin-bottom: 0.5rem;
+    }
+
+    .guest-title-tag {
+      font-size: 0.9rem;
+      color: var(--silver-soft);
+      letter-spacing: 0.2em;
+      margin-bottom: 2rem;
+      display: block;
+      border-bottom: 1px solid var(--glass-border);
+      padding-bottom: 1rem;
+    }
+
+    .guest-bio {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--silver-primary);
+      margin-bottom: 2rem;
+    }
+
+    .welcome-card {
+      background: var(--bg-surface);
+      border-left: 3px solid var(--silver-bright);
+      padding: 1.5rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .welcome-card p {
+      font-style: italic;
+      color: var(--silver-soft);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       7. SPONSORS PAGE
+       ========================================================================== */
+    .sponsor-section {
+      margin-bottom: 4rem;
+    }
+
+    .sponsor-tier-title {
+      text-align: center;
+      font-size: 1.2rem;
+      letter-spacing: 0.25em;
+      color: var(--silver-bright);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .sponsor-grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .grid-platinum { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+    .grid-gold { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .grid-silver { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+    .sponsor-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--glass-border);
+      padding: 2.5rem 1.5rem;
+      border-radius: 6px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-lux);
+      transition: var(--transition-smooth);
+    }
+
+    .sponsor-card:hover {
+      border-color: var(--silver-bright);
+      transform: translateY(-5px);
+    }
+
+    .sponsor-logo-text {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--silver-bright);
+      letter-spacing: 0.1em;
+    }
+
+    .sponsor-subtext {
+      font-size: 0.75rem;
+      color: var(--silver-dark);
+      letter-spacing: 0.15em;
+      margin-top: 0.5rem;
+    }
+
+    /* ==========================================================================
+       8. VENUE & MAP PAGE
+       ========================================================================== */
+    .venue-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .venue-info-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--glass-border);
+      padding: 3rem;
+      border-radius: 8px;
+    }
+
+    .venue-detail-group {
+      margin-bottom: 2rem;
+    }
+
+    .venue-detail-group h4 {
+      font-size: 0.8rem;
+      color: var(--silver-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .venue-detail-group p {
+      font-size: 1.1rem;
+      color: var(--silver-bright);
+    }
+
+    .map-box {
+      width: 100%;
+      height: 100%;
+      min-height: 350px;
+      background: var(--bg-surface);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* ==========================================================================
+       9. TERMS & CONDITIONS PAGE
+       ========================================================================== */
+    .terms-wrapper {
+      max-width: 850px;
+      margin: 0 auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--glass-border);
+      padding: 3.5rem;
+      border-radius: 8px;
+    }
+
+    .terms-list {
+      list-style: none;
+      counter-reset: terms-counter;
+    }
+
+    .terms-item {
+      counter-increment: terms-counter;
+      margin-bottom: 2rem;
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .terms-item::before {
+      content: counter(terms-counter, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--silver-bright);
+    }
+
+    .terms-item h4 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--silver-bright);
+    }
+
+    .terms-item p {
+      font-size: 0.9rem;
+      color: var(--silver-soft);
+      line-height: 1.7;
+    }
+
+    /* ==========================================================================
+       10. GLOBAL FOOTER
+       ========================================================================== */
+    footer {
+      background: var(--bg-deep);
+      border-top: 1px solid var(--glass-border);
+      padding: 4rem 0 2rem 0;
+      margin-top: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-nav a {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      color: var(--silver-dark);
+      transition: var(--transition-smooth);
+    }
+
+    .footer-nav a:hover {
+      color: var(--silver-bright);
+    }
+
+    .copyright {
+      font-size: 0.75rem;
+      color: var(--silver-dark);
+      letter-spacing: 0.1em;
+      border-top: 1px solid rgba(197, 199, 204, 0.1);
+      width: 100%;
+      padding-top: 2rem;
+    }
+
+    /* ==========================================================================
+       11. RESPONSIVE BREAKPOINTS
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .hero-title { font-size: 3.2rem; }
+      .chief-guest-layout, .venue-layout { grid-template-columns: 1fr; }
+      .timeline::before { left: 20px; }
+      .timeline-item { width: 100%; padding-left: 50px !important; padding-right: 0 !important; }
+      .timeline-item:nth-child(even) { left: 0; }
+      .timeline-dot { left: 13px !important; right: auto !important; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 90px; left: 0; width: 100%;
+        background: var(--bg-deep);
+        border-bottom: 1px solid var(--glass-border);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        text-align: center;
+      }
+      .nav-links.open { display: flex; }
+      .mobile-menu-btn { display: flex; }
+      .countdown-container { display: grid; grid-template-columns: repeat(2, 1fr); }
+      .cta-group { flex-direction: column; width: 100%; }
+      .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header>
+    <div class="container nav-container">
+      <a href="#home" class="brand-logo">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#C5C7CC" stroke-width="2"/>
+          <path d="M30 70 V30 L50 55 L70 30 V70" stroke="#E6E7EB" stroke-width="4" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <div class="brand-title">DESTINY '26</div>
+          <div class="brand-subtitle">MASTER MIND EDUCATION</div>
+        </div>
+      </a>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active">HOME</a></li>
+        <li><a href="#agenda" class="nav-link">AGENDA</a></li>
+        <li><a href="#chief-guest" class="nav-link">CHIEF GUEST</a></li>
+        <li><a href="#sponsors" class="nav-link">SPONSORS</a></li>
+        <li><a href="#venue" class="nav-link">VENUE</a></li>
+        <li><a href="#terms" class="nav-link">TERMS</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         1. HOME PAGE VIEW
+         ========================================================================== -->
+    <section id="home" class="page-view active">
+      <div class="container hero">
+        <div class="hero-badge">5TH ANNIVERSARY CELEBRATION</div>
+        <h1 class="hero-title">DESTINY '26</h1>
+        <div class="hero-subtitle">DREAM TO DESTINY</div>
+
+        <div class="hero-meta">
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>31 OCTOBER 2026</span>
+          </div>
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>1:30 PM ONWARDS</span>
+          </div>
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>TAMARIND BANQUET HALL, SRI LANKA</span>
+          </div>
+        </div>
+
+        <div class="countdown-container">
+          <div class="countdown-card">
+            <div class="countdown-value" id="days">00</div>
+            <div class="countdown-label">Days</div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-value" id="hours">00</div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-value" id="minutes">00</div>
+            <div class="countdown-label">Minutes</div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-value" id="seconds">00</div>
+            <div class="countdown-label">Seconds</div>
+          </div>
+        </div>
+
+        <div class="cta-group">
+          <a href="#agenda" class="btn-primary">EXPLORE AGENDA</a>
+          <a href="#venue" class="btn-secondary">LOCATION DETAILS</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         2. AGENDA PAGE VIEW
+         ========================================================================== -->
+    <section id="agenda" class="page-view">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">SCHEDULE OF EVENTS</span>
+          <h2 class="section-title">OFFICIAL AGENDA</h2>
+          <div class="silver-divider"></div>
+        </div>
+
+        <div class="search-bar">
+          <input type="text" id="agendaSearch" class="search-input" placeholder="Search event, topic, or time (e.g. '2:30 PM' or 'Welcome')...">
+          <button class="btn-primary" style="padding: 0.8rem 1.5rem;" onclick="filterAgenda()">SEARCH</button>
+        </div>
+
+        <div class="timeline" id="timelineContainer">
+          <!-- Timeline entries rendered via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         3. CHIEF GUEST PAGE VIEW
+         ========================================================================== -->
+    <section id="chief-guest" class="page-view">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">HONORED GUEST</span>
+          <h2 class="section-title">CHIEF GUEST</h2>
+          <div class="silver-divider"></div>
+        </div>
+
+        <div class="chief-guest-layout">
+          <div class="guest-image-container">
+            <svg viewBox="0 0 400 500" width="100%" height="100%" style="background: #30091A;">
+              <rect width="100%" height="100%" fill="#30091A"/>
+              <circle cx="200" cy="180" r="80" fill="#4A1028" stroke="#C5C7CC" stroke-width="2"/>
+              <path d="M100 420 C100 300, 300 300, 300 420 Z" fill="#4A1028" stroke="#C5C7CC" stroke-width="2"/>
+              <text x="50%" y="470" font-family="'Cinzel', serif" font-size="16" fill="#A9ABB3" text-anchor="middle">DTM YOGENDRA PRASAD</text>
+            </svg>
+          </div>
+
+          <div class="guest-details">
+            <h3>DTM YOGENDRA PRASAD SATHIYASEELAN</h3>
+            <span class="guest-title-tag">CHARTERED ACCOUNTANT & CHIEF OPERATING OFFICER</span>
+
+            <p class="guest-bio">
+              We are deeply honored to present DTM Yogendra Prasad Sathiyaseelan as our Chief Guest for DESTINY ’26. 
+              As a distinguished Chartered Accountant and Chief Operating Officer at A.S.S. IT Solutions (Pvt) Ltd, he brings 
+              a wealth of leadership, strategic vision, and inspiring commitment to educational and professional excellence.
+            </p>
+
+            <div class="welcome-card">
+              <p>"Master Mind Education proudly welcomes DTM Yogendra Prasad Sathiyaseelan to celebrate five years of transforming potential into excellence."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         4. SPONSORS PAGE VIEW
+         ========================================================================== -->
+    <section id="sponsors" class="page-view">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">OUR DISTINGUISHED PARTNERS</span>
+          <h2 class="section-title">OFFICIAL SPONSORS</h2>
+          <div class="silver-divider"></div>
+        </div>
+
+        <!-- Platinum -->
+        <div class="sponsor-section">
+          <div class="sponsor-tier-title">PLATINUM SPONSOR</div>
+          <div class="sponsor-grid grid-platinum">
+            <div class="sponsor-card">
+              <div class="sponsor-logo-text">KHALIFA NIYAS</div>
+              <div class="sponsor-subtext">A/L ICT LECTURER</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gold Tier Title (Rendered strictly in Silver/Burgundy UI) -->
+        <div class="sponsor-section">
+          <div class="sponsor-tier-title">GOLD SPONSOR</div>
+          <div class="sponsor-grid grid-gold">
+            <div class="sponsor-card">
+              <div class="sponsor-logo-text">GLORIOUS</div>
+              <div class="sponsor-subtext">OFFICIAL PARTNER</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Silver Tier -->
+        <div class="sponsor-section">
+          <div class="sponsor-tier-title">SILVER SPONSORS</div>
+          <div class="sponsor-grid grid-silver">
+            <div class="sponsor-card"><div class="sponsor-logo-text">MR. ZAKIR HUSSAIN</div></div>
+            <div class="sponsor-card"><div class="sponsor-logo-text">MANAGEMENT ACADEMY</div></div>
+            <div class="sponsor-card"><div class="sponsor-logo-text">ABC CREATIONS</div></div>
+            <div class="sponsor-card"><div class="sponsor-logo-text">GH PRODUCTIONS</div></div>
+            <div class="sponsor-card"><div class="sponsor-logo-text">HANAM NAEEM</div></div>
+            <div class="sponsor-card"><div class="sponsor-logo-text">X MOBILE</div></div>
+          </div>
+        </div>
+
+        <!-- Hydration Partner -->
+        <div class="sponsor-section">
+          <div class="sponsor-tier-title">HYDRATION PARTNER</div>
+          <div class="sponsor-grid grid-platinum">
+            <div class="sponsor-card">
+              <div class="sponsor-logo-text">AMERICAN WATER</div>
+              <div class="sponsor-subtext">100% PURE & NATURAL SOURCE</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         5. VENUE PAGE VIEW
+         ========================================================================== -->
+    <section id="venue" class="page-view">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">EVENT LOCATION</span>
+          <h2 class="section-title">THE VENUE</h2>
+          <div class="silver-divider"></div>
+        </div>
+
+        <div class="venue-layout">
+          <div class="venue-info-card">
+            <div class="venue-detail-group">
+              <h4>LOCATION</h4>
+              <p>Tamarind Banquet Hall</p>
+              <p style="font-size: 0.9rem; color: var(--silver-soft);">Sri Lanka</p>
+            </div>
+
+            <div class="venue-detail-group">
+              <h4>DATE & TIME</h4>
+              <p>Saturday, 31st October 2026</p>
+              <p style="font-size: 0.9rem; color: var(--silver-soft);">Hall opens at 12:00 PM for guests</p>
+              <p style="font-size: 0.9rem; color: var(--silver-soft);">Event starts at 1:30 PM</p>
+            </div>
+
+            <a href="https://maps.google.com/?q=Tamarind+Banquet+Hall+Sri+Lanka" target="_blank" rel="noopener" class="btn-primary" style="display: inline-block; text-align: center; margin-top: 1rem;">OPEN IN GOOGLE MAPS</a>
+          </div>
+
+          <div class="map-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--silver-bright)" stroke-width="1.5" width="48" height="48" style="margin-bottom: 1rem;">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            <h4 style="color: var(--silver-bright); margin-bottom: 0.5rem;">TAMARIND BANQUET HALL</h4>
+            <p style="color: var(--silver-soft); font-size: 0.85rem; max-width: 300px;">Click the map button to view directions and interactive navigation via Google Maps.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         6. TERMS & CONDITIONS PAGE VIEW
+         ========================================================================== -->
+    <section id="terms" class="page-view">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">EVENT GUIDELINES</span>
+          <h2 class="section-title">TERMS & CONDITIONS</h2>
+          <div class="silver-divider"></div>
+        </div>
+
+        <div class="terms-wrapper">
+          <ol class="terms-list">
+            <li class="terms-item">
+              <h4>TICKET ADMISSION & VERIFICATION</h4>
+              <p>All attendees must present a valid official invitation or entry pass upon arrival. Passes are non-transferable unless explicit prior authorization is granted by Master Mind Education management.</p>
+            </li>
+            <li class="terms-item">
+              <h4>PUNCTUALITY & SCHEDULE</h4>
+              <p>Guests are kindly requested to be seated by 1:15 PM. Hall doors open at 12:00 PM. Program timings are strictly followed to ensure a smooth flow of events.</p>
+            </li>
+            <li class="terms-item">
+              <h4>DRESS CODE</h4>
+              <p>Formal or Smart Casual attire is strictly required for entry to DESTINY '26 in accordance with the prestige of the 5th Anniversary celebration.</p>
+            </li>
+            <li class="terms-item">
+              <h4>PHOTOGRAPHY & PRIVACY</h4>
+              <p>Official media personnel will record and photograph the event. By attending, guests consent to media usage for promotional and archival purposes by Master Mind Education.</p>
+            </li>
+            <li class="terms-item">
+              <h4>RIGHT OF ADMISSION</h4>
+              <p>Organizers reserve the right of admission and may request guests to adhere to venue safety and security regulations at all times.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       GLOBAL FOOTER
+       ========================================================================== -->
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <div class="brand-title" style="font-size: 1.3rem;">DESTINY '26</div>
+        <div class="brand-subtitle" style="margin-top: 4px;">MASTER MIND EDUCATION — 5TH ANNIVERSARY</div>
+      </div>
+
+      <div class="footer-nav">
+        <a href="#home">HOME</a>
+        <a href="#agenda">AGENDA</a>
+        <a href="#chief-guest">CHIEF GUEST</a>
+        <a href="#sponsors">SPONSORS</a>
+        <a href="#venue">VENUE</a>
+        <a href="#terms">TERMS & CONDITIONS</a>
+      </div>
+
+      <div class="copyright">
+        © 2026 Master Mind Education. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       JAVASCRIPT ARCHITECTURE
+       ========================================================================== -->
+  <script>
+    /* --------------------------------------------------------------------------
+       1. ROUTING SYSTEM (Hash-Based SPA Navigation)
+       -------------------------------------------------------------------------- */
+    const routes = ['home', 'agenda', 'chief-guest', 'sponsors', 'venue', 'terms'];
+
+    function handleRoute() {
+      let hash = window.location.hash.replace('#', '');
+      if (!routes.includes(hash)) {
+        hash = 'home';
+      }
+
+      // Toggle Active Views
+      document.querySelectorAll('.page-view').forEach(view => {
+        view.classList.remove('active');
+      });
+      const activeView = document.getElementById(hash);
+      if (activeView) activeView.classList.add('active');
+
+      // Update Nav Links
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${hash}`) {
+          link.classList.add('active');
+        }
+      });
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('DOMContentLoaded', () => {
+      handleRoute();
+      initCountdown();
+      renderAgenda(agendaData);
+    });
+
+    // Mobile Navigation Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+
+    /* --------------------------------------------------------------------------
+       2. COUNTDOWN TIMER (Sri Lanka Time Target)
+       -------------------------------------------------------------------------- */
+    function initCountdown() {
+      // Event Target: October 31, 2026 13:30:00 UTC+05:30
+      const targetDate = new Date('2026-10-31T13:30:00+05:30').getTime();
+
+      function update() {
+        const now = new Date().getTime();
+        const difference = targetDate - now;
+
+        if (difference <= 0) {
+          document.getElementById('days').innerText = '00';
+          document.getElementById('hours').innerText = '00';
+          document.getElementById('minutes').innerText = '00';
+          document.getElementById('seconds').innerText = '00';
+          return;
+        }
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = String(days).padStart(2, '0');
+        document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+      }
+
+      update();
+      setInterval(update, 1000);
+    }
+
+    /* --------------------------------------------------------------------------
+       3. AGENDA DATA & SMART SEARCH SYSTEM
+       -------------------------------------------------------------------------- */
+    const agendaData = [
+      { time: '1:00 PM', minutes: 780, title: 'Hall Opens for Guests', desc: 'Doors open for guest arrival and seating.' },
+      { time: '1:30 PM', minutes: 810, title: 'National Anthem', desc: 'Opening ceremony and tribute.' },
+      { time: '1:35 PM', minutes: 815, title: 'Introduction Dance', desc: 'Cultural performance by Master Mind students.' },
+      { time: '1:40 PM', minutes: 820, title: 'Welcome Address', desc: 'Opening remarks by the Director of Master Mind Education.' },
+      { time: '2:00 PM', minutes: 840, title: 'Keynote Speech: Chief Guest', desc: 'Address by DTM Yogendra Prasad Sathiyaseelan.' },
+      { time: '2:30 PM', minutes: 870, title: 'Student Excellence Awards', desc: 'Recognizing academic achievements.' },
+      { time: '2:37 PM', minutes: 877, title: 'Special Recognition Award', desc: 'Honoring top performance.' },
+      { time: '3:15 PM', minutes: 915, title: 'Refreshment Break', desc: 'Networking and refreshments.' },
+      { time: '3:45 PM', minutes: 945, title: 'Sponsor Recognition & Panel', desc: 'Acknowledging partners and sponsors.' },
+      { time: '4:30 PM', minutes: 990, title: 'Anniversary Celebration Segment', desc: 'Commemorating 5 years of excellence.' },
+      { time: '5:15 PM', minutes: 1035, title: 'Vote of Thanks & Closing', desc: 'Final remarks and conclusion.' }
+    ];
+
+    function renderAgenda(items, nearbySet = new Set()) {
+      const container = document.getElementById('timelineContainer');
+      container.innerHTML = '';
+
+      if (items.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--silver-dark); padding: 2rem;">No matching agenda items found.</p>';
+        return;
+      }
+
+      items.forEach(item => {
+        const isNearby = nearbySet.has(item);
+        const itemHtml = `
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-time">
+                ${item.time}
+                ${isNearby ? '<span class="badge-nearby">Nearby</span>' : ''}
+              </div>
+              <div class="timeline-title">${item.title}</div>
+              <div class="timeline-desc">${item.desc}</div>
+            </div>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', itemHtml);
+      });
+    }
+
+    function parseSearchTime(query) {
+      const timeRegex = /^(\d{1,2}):(\d{2})\s*(AM|PM)?$/i;
+      const match = query.trim().match(timeRegex);
+      if (!match) return null;
+
+      let hrs = parseInt(match[1]);
+      const mins = parseInt(match[2]);
+      const modifier = match[3] ? match[3].toUpperCase() : null;
+
+      if (modifier === 'PM' && hrs < 12) hrs += 12;
+      if (modifier === 'AM' && hrs === 12) hrs = 0;
+
+      return hrs * 60 + mins;
+    }
+
+    function filterAgenda() {
+      const query = document.getElementById('agendaSearch').value.trim().toLowerCase();
+      if (!query) {
+        renderAgenda(agendaData);
+        return;
+      }
+
+      const searchedMinutes = parseSearchTime(query);
+
+      if (searchedMinutes !== null) {
+        const exactMatches = agendaData.filter(item => item.minutes === searchedMinutes);
+        const windowSize = 15; // 15-minute tolerance
+        const nearbyMatches = agendaData.filter(item => Math.abs(item.minutes - searchedMinutes) <= windowSize && item.minutes !== searchedMinutes);
+
+        const nearbySet = new Set(nearbyMatches);
+        const combined = [...exactMatches, ...nearbyMatches];
+        renderAgenda(combined, nearbySet);
+      } else {
+        const textMatches = agendaData.filter(item => 
+          item.title.toLowerCase().includes(query) || 
+          item.desc.toLowerCase().includes(query) ||
+          item.time.toLowerCase().includes(query)
+        );
+        renderAgenda(textMatches);
+      }
+    }
+
+    // Trigger search on typing input
+    document.getElementById('agendaSearch').addEventListener('input', filterAgenda);
+  </script>
+</body>
+</html>
